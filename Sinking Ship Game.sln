@@ -1,0 +1,23 @@
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2008
+
+Project("{3EF9A368-47D4-CF99-A929-4CF4E92E4879}") = "Sinking Ship Game", "Assembly-CSharp.csproj", "{F09BE2CA-00DC-9589-ABC0-42848D95E5B1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F09BE2CA-00DC-9589-ABC0-42848D95E5B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F09BE2CA-00DC-9589-ABC0-42848D95E5B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F09BE2CA-00DC-9589-ABC0-42848D95E5B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F09BE2CA-00DC-9589-ABC0-42848D95E5B1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Assembly-CSharp.csproj
+	EndGlobalSection
+EndGlobal
