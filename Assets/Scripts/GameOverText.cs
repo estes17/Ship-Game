@@ -20,6 +20,7 @@ public class GameOverText : MonoBehaviour {
 
             ItsGameOverText.text = "GAME OVER";
 
+
         }
  
     }

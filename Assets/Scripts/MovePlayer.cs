@@ -1,103 +1,4 @@
-﻿/*using UnityEngine;
-using System.Collections;
-
-public class MovePlayer : MonoBehaviour {
-
-
-
-
-	public float speed;
-
-	public bool canJump;
-
-	//Swim
-	public bool isSwimming;
-	private WaterBehavior waterLevel;
-
-	private Rigidbody rb;
-
-	void Start()
-	{
-		canJump = true;
-	}
-
-
-	void FixedUpdate()
-	{
-		//float move = Input.GetAxis("Horizontal");
-		float move;
-
-		float moveUp = 0.0f;
-
-		float swim;
-
-		if (Input.GetButtonDown("Jump") && canJump)
-		{
-			moveUp = Input.GetAxis("Jump");
-
-		}
-
-		//Swim
-		if (isSwimming == true)
-		{
-			move = Input.GetAxis("Horizontal");
-			swim = Input.GetAxis("Vertical");
-			GetComponent<Rigidbody2D>().velocity = new Vector2(move * speed/2f, swim * speed/1.5f);
-			GetComponent<Rigidbody2D>().gravityScale = 7;
-		} 
-
-		if (isSwimming == false)
-		{
-			move = Input.GetAxis("Horizontal");
-			GetComponent<Rigidbody2D>().velocity = new Vector2(move * speed, moveUp * speed * 10);
-			GetComponent<Rigidbody2D>().gravityScale = 15;
-		}
-
-
-	}
-
-
-	void OnTriggerStay2D(Collider2D other)
-	{
-		if (other.gameObject.tag == "Water") 
-		{
-			isSwimming = true;
-		} 
-	}
-
-	void OnTriggerExit2D(Collider2D other)
-	{
-		if (other.gameObject.tag == "Water") 
-		{
-			isSwimming = false;
-		}
-	}
-
-	void OnCollisionEnter2D(Collision2D other)
-	{
-		if (other.gameObject.tag == "Ground")
-		{
-			canJump = true;
-		}
-
-
-	}
-
-	void OnCollisionExit2D(Collision2D other)
-	{
-		if (other.gameObject.tag == "Ground")
-		{
-			canJump = false;
-		}
-
-
-	}
-
-}
-*/
-
-//with ladder
-
+﻿
 using UnityEngine;
 using System.Collections;
 
@@ -111,6 +12,8 @@ public class MovePlayer : MonoBehaviour
 
     private bool canJump;
 
+	private bool canPatch;
+
     //Swim
     private bool isSwimming;
     private WaterBehavior waterLevel;
@@ -123,9 +26,12 @@ public class MovePlayer : MonoBehaviour
 
     private Rigidbody rb;
 
+	private GameObject thisCrackTrigger;
+
     void Start()
     {
         canJump = true;
+		thisCrackTrigger = null;
     }
 
 
@@ -138,7 +44,7 @@ public class MovePlayer : MonoBehaviour
 
         float swim;
 
-        if (Input.GetButtonDown("Jump") && canJump)
+		if (Input.GetButtonDown("Jump") && canJump)
         {
             moveUp = Input.GetAxis("Jump");
             //canJump = false;
@@ -159,6 +65,15 @@ public class MovePlayer : MonoBehaviour
 
         }
 
+		if (Input.GetKeyDown("f") && canPatch && thisCrackTrigger != null && PatchKit > 0)
+		{
+			thisCrackTrigger.transform.parent.gameObject.SetActive (false);
+			canPatch = false;
+			thisCrackTrigger = null;
+			PatchKit = PatchKit - 1;
+		}
+
+
 
         //Swim
         if (isSwimming == true)
@@ -169,8 +84,7 @@ public class MovePlayer : MonoBehaviour
             //Vector2 swim = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
             GetComponent<Rigidbody2D>().gravityScale = 7;
         }
-
-        if (isSwimming == false)
+        else if (isSwimming == false)
         {
 
             move = Input.GetAxis("Horizontal");
@@ -197,6 +111,11 @@ public class MovePlayer : MonoBehaviour
 			isSwimming = true;
 
 		}
+		if (other.gameObject.tag == "Patch Trigger")
+		{
+			canPatch = true;
+			thisCrackTrigger = other.gameObject;
+		}
 
 	}
 
@@ -213,7 +132,7 @@ public class MovePlayer : MonoBehaviour
 
         if (other.gameObject.tag == "PatchKit")
         {
-            PatchKit = 3; ;
+			PatchKit = 3;
         }
     }
 
@@ -229,6 +148,11 @@ public class MovePlayer : MonoBehaviour
             canClimb = false;
 			isClimbing = false;
         }
+
+		if (other.gameObject.tag == "Patch Trigger")
+		{
+			canPatch = false;
+		}
     }
 
     void OnCollisionEnter2D(Collision2D other)

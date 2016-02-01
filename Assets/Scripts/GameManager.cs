@@ -52,8 +52,7 @@ public class GameManager : MonoBehaviour
             Timer = Time.time + 3; //This sets the timer 3 seconds into the future
         }
 
-        gameOver = isGameOver(calcTotalWater()); // <-----------------------------------------------------------------------------------------------------------
-        //  */
+        gameOver = isGameOver(calcTotalWater());
     }
 
     string GetCrackId(GameObject other)

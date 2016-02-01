@@ -1,0 +1,23 @@
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2008
+
+Project("{C7A53633-3F2F-C3F9-D5B0-E4B9A56C626F}") = "Ship-Game-master", "Assembly-CSharp.csproj", "{73B3FCBA-30C8-BF34-B920-0B0BB493DB70}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{73B3FCBA-30C8-BF34-B920-0B0BB493DB70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73B3FCBA-30C8-BF34-B920-0B0BB493DB70}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73B3FCBA-30C8-BF34-B920-0B0BB493DB70}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73B3FCBA-30C8-BF34-B920-0B0BB493DB70}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Assembly-CSharp.csproj
+	EndGlobalSection
+EndGlobal
