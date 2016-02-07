@@ -4,32 +4,29 @@ using System.Collections;
 public class GameManager : MonoBehaviour
 {
 
-    private float Timer = 2.0f;// = 0.0f;
+    private float Timer = 2.0f;
 
-    public float maxWater = 39.0f; // <-----------------------------------------------------------------------------------
+    public float maxWater = 39.0f;
 
 
     public GameObject PatchKit;
-    public GameObject[] cracks;
-    public GameObject[] waterCubes;
-
-    public GameObject[] activeWater; // <-----------------------------------------------------------------------------------
+	public GameObject[] rooms;
+	public GameObject[] allWater;
+    public GameObject[] activeWater;
 
     public bool gameOver = false;
 
     // Use this for initialization
     void Start()
     {
-        cracks = GameObject.FindGameObjectsWithTag("Crack");
-        foreach (GameObject obj in cracks)
+		allWater = GameObject.FindGameObjectsWithTag ("Water");
+		rooms = GameObject.FindGameObjectsWithTag ("Room");
+		foreach (GameObject obj in rooms)
         {
-            obj.SetActive(false);
-        }
-
-        waterCubes = GameObject.FindGameObjectsWithTag("Water");
-        foreach (GameObject obj in waterCubes)
-        {
-            obj.SetActive(false);
+			for (int i = 0; i < obj.transform.childCount; i++)
+			{
+				obj.transform.GetChild (i).gameObject.SetActive (false);
+			}
         }
         //This would make the patch kits at the start
         Instantiate(PatchKit, transform.position, transform.rotation);
@@ -39,15 +36,15 @@ public class GameManager : MonoBehaviour
     void Update()
     {
 
-        if (Timer < Time.time)
-        { //This checks wether real time has caught up to the timer
-          // Instantiate(Crack, transform.position, transform.rotation); //This spawns the cracks when time
+		if (Timer < Time.time)
+        { 
 
-            int i = (int)(Random.value * (float)cracks.Length);
+			int rng = (int)(Random.value * (float)rooms.Length);
+			for (int i = 0; i < rooms[rng].transform.childCount; i++)
+			{
+				rooms [rng].transform.GetChild (i).gameObject.SetActive (true);
+			}
 
-            cracks[i].SetActive(true);
-            string crackId = GetCrackId(cracks[i]);
-            activateWater(crackId);
 
             Timer = Time.time + 3; //This sets the timer 3 seconds into the future
         }
@@ -55,28 +52,7 @@ public class GameManager : MonoBehaviour
         gameOver = isGameOver(calcTotalWater());
     }
 
-    string GetCrackId(GameObject other)
-    {
-        string rtn = other.ToString();
-        rtn = rtn.TrimStart("Crack ".ToCharArray());
-        //rtn = rtn.TrimEnd (" (UnityEngine.GameObject)".ToCharArray());
-        return rtn;
-    }
-
-    void activateWater(string id)
-    {
-        string waterId;
-        foreach (GameObject obj in waterCubes)
-        {
-            waterId = obj.ToString();
-            waterId = waterId.TrimStart("Water Cube ".ToCharArray());
-            //crackName = crackName.TrimEnd (" (UnityEngine.GameObject)".ToCharArray ());
-            if (id.Equals(waterId))
-                obj.SetActive(true);
-        }
-    }
-
-    float calcTotalWater() //<-------------------------------------------------------------------------
+    float calcTotalWater()
     {
         float rtn = 0.0f;
         activeWater = GameObject.FindGameObjectsWithTag("Water");
@@ -88,7 +64,7 @@ public class GameManager : MonoBehaviour
         return rtn;
     }
 
-    bool isGameOver(float f) //<-----------------------------------------------------------------------------------------
+    bool isGameOver(float f)
     {
         return f >= maxWater;
     }
