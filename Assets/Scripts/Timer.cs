@@ -18,13 +18,16 @@ public class Timer : MonoBehaviour
 	public float timer;
 	float timeRemaining = 300.0f;
 	public string timerFormatted;
+	public GameObject GameManager;
+	public GUIStyle largeFont;
 
 
 
 	void Start()
 	{
 
-
+		largeFont.fontSize = 20;
+		largeFont.normal.textColor = Color.white;
 		// SetTimeText();
 		//  winText.text = "";
 
@@ -56,12 +59,15 @@ public class Timer : MonoBehaviour
 	{
 
 
-		minutes = Mathf.FloorToInt(timeRemaining / 60F);
-		seconds = Mathf.FloorToInt(timeRemaining - minutes * 60);
+		if (Time.time < 300 && GameManager.GetComponent<GameManager> ().gameOver == false) {
+			minutes = Mathf.FloorToInt (timeRemaining / 60F);
+			seconds = Mathf.FloorToInt (timeRemaining - minutes * 60);
 
 
-		string niceTime = "Time remaining until rescue: " + string.Format("{0:00}:{1:00}", minutes, seconds);
+			string niceTime = "Time to Survive: " + string.Format ("{0:00}:{1:00}", minutes, seconds);
 
-		GUI.Label(new Rect(10, 10, 250, 100), niceTime);
+			//GUI.Label (new Rect (10, 10, 250, 100), niceTime);
+			GUI.Label(new Rect(10,10,250,100),niceTime, largeFont);
+		}
 	}
 }

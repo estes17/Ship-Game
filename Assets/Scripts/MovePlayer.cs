@@ -28,10 +28,13 @@ public class MovePlayer : MonoBehaviour
 
 	private GameObject thisCrackTrigger;
 
+	public bool nux;
+
     void Start()
     {
         canJump = true;
 		thisCrackTrigger = null;
+		nux = false;
     }
 
 
@@ -73,7 +76,10 @@ public class MovePlayer : MonoBehaviour
 			PatchKit = PatchKit - 1;
 		}
 
-
+		if (Input.GetKeyDown ("x"))
+		{
+			nux = !nux;
+		}
 
         //Swim
         if (isSwimming == true)
@@ -89,15 +95,18 @@ public class MovePlayer : MonoBehaviour
 
             move = Input.GetAxis("Horizontal");
             GetComponent<Rigidbody2D>().velocity = new Vector2(move * speed, moveUp * speed * 10);
-            GetComponent<Rigidbody2D>().gravityScale = 15;
+            GetComponent<Rigidbody2D>().gravityScale = 32;
+
+			Physics2D.gravity = new Vector2 (0, -10);
 
         }
 
         //If climbing ladder turn off gravity and only let player move up and down
         if (isClimbing == true)
         {
-            move = Input.GetAxis("Vertical");
-            GetComponent<Rigidbody2D>().velocity = new Vector2(0, move * speed * 3);
+            move = Input.GetAxis("Horizontal");
+			moveUp = Input.GetAxis("Vertical");
+			GetComponent<Rigidbody2D>().velocity = new Vector2(move, moveUp * speed);
             GetComponent<Rigidbody2D>().gravityScale = 0;
         }
 
@@ -133,7 +142,16 @@ public class MovePlayer : MonoBehaviour
         if (other.gameObject.tag == "PatchKit")
         {
 			PatchKit = 3;
+			if (nux)
+			{
+				PatchKit = 100;
+			}
         }
+
+		if (other.gameObject.tag == "Door")
+		{
+			other.gameObject.transform.GetChild (0).gameObject.SetActive (false);
+		}
     }
 
     void OnTriggerExit2D(Collider2D other)
@@ -152,6 +170,11 @@ public class MovePlayer : MonoBehaviour
 		if (other.gameObject.tag == "Patch Trigger")
 		{
 			canPatch = false;
+		}
+
+		if (other.gameObject.tag == "Door")
+		{
+			other.gameObject.transform.GetChild (0).gameObject.SetActive (true);
 		}
     }
 

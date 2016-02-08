@@ -6,9 +6,13 @@ public class WaterPercentage : MonoBehaviour {
 
 	public Text WaterPercentText;
 	public GameObject GameManager;
+	public GUIStyle largeFont;
+
 	// Use this for initialization
 	void Start () {
 
+		largeFont.fontSize = 20;
+		largeFont.normal.textColor = Color.white;
 
 	}
 
@@ -26,11 +30,12 @@ public class WaterPercentage : MonoBehaviour {
 
 	void OnGUI()
 	{
-		int WaterPercentCalculation = (int)((GameManager.GetComponent<GameManager>().WaterPercent/ 48.75f)*100.0f);
-		string WaterCalc = "Ship currently filled: " + WaterPercentCalculation + "%";
+		if (Time.time < 300 && GameManager.GetComponent<GameManager> ().gameOver == false) {
+			int WaterPercentCalculation = (int)((GameManager.GetComponent<GameManager> ().WaterPercent / 48.75f) * 100.0f);
+			string WaterCalc = "Ship Filled: " + WaterPercentCalculation + "%";
 
 
-		GUI.Label(new Rect(10, 25, 250, 100), WaterCalc);
-
+			GUI.Label (new Rect (10, 30, 250, 100), WaterCalc, largeFont);
+		}
 	}
 }

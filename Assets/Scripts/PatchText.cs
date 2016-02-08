@@ -6,11 +6,15 @@ public class PatchText : MonoBehaviour {
 
 	public Text PatchKitText;
 	public GameObject player;
+	public GameObject GameManager;
+	public GUIStyle largeFont;
 
 	// Use this for initialization
 	void Start()
 	{
 
+		largeFont.fontSize = 20;
+		largeFont.normal.textColor = Color.white;
 	}
 
 	// Update is called once per frame
@@ -23,9 +27,12 @@ public class PatchText : MonoBehaviour {
 
 	void OnGUI()
 	{
-		string patchString = "Patch Kit: " + player.GetComponent<MovePlayer>().PatchKit;
+		if (Time.time < 300 && GameManager.GetComponent<GameManager> ().gameOver == false)
+		{
+			string patchString = "Patch Kits: " + player.GetComponent<MovePlayer>().PatchKit;
 
-		GUI.Label(new Rect(10, 40, 250, 100), patchString);
+			GUI.Label(new Rect(10, 50, 250, 100), patchString, largeFont);
+		}
 	}
 
 }

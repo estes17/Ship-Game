@@ -49,6 +49,8 @@
      <Compile Include="Assets\Scripts\GameOverText.cs" />
      <Compile Include="Assets\Scripts\MovePlayer.cs" />
      <Compile Include="Assets\Scripts\PatchText.cs" />
+     <Compile Include="Assets\Scripts\Propeller.cs" />
+     <Compile Include="Assets\Scripts\Rotator.cs" />
      <Compile Include="Assets\Scripts\Timer.cs" />
      <Compile Include="Assets\Scripts\WaterBehavior.cs" />
      <Compile Include="Assets\Scripts\WaterPercentage.cs" />
