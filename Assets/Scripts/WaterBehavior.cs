@@ -3,16 +3,16 @@ using System.Collections;
 
 public class WaterBehavior : MonoBehaviour {
 
-    public float riseSpeed = 0.05f;
-    public float maxLevel = 4.0f;
-	public float dropSpeed = 0.05f;
+    public float riseSpeed = 0.005f;
+    public float maxLevel = 3.5f;
+	public float dropSpeed = 0.0025f;
 
 	public float waterLevel;
 	public GameObject sibling;
 	public bool isRising;
 
-	public int roomNum = 0;
-	public char floorChar = "T";
+	public int roomNum;
+	public string floorStr;
 
 
 	// Use this for initialization
