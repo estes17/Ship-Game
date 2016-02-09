@@ -32,7 +32,7 @@ public class WaterPercentage : MonoBehaviour {
 	{
 		if (Time.time < 300 && GameManager.GetComponent<GameManager> ().gameOver == false) {
 			int WaterPercentCalculation = (int)((GameManager.GetComponent<GameManager> ().WaterPercent / 48.75f) * 100.0f);
-			string WaterCalc = "Ship Filled: " + WaterPercentCalculation + "%";
+			string WaterCalc = "Percent Filled: " + WaterPercentCalculation + "% / 66%";
 
 
 			GUI.Label (new Rect (10, 30, 250, 100), WaterCalc, largeFont);

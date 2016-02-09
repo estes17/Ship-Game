@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
 
     private float Timer = 2.0f;
 
-    public float maxWater = 39.0f;
+    public float maxWater = 32.175f;
 
 
     public GameObject PatchKit;

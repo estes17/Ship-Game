@@ -94,7 +94,7 @@ public class MovePlayer : MonoBehaviour
         {
 
             move = Input.GetAxis("Horizontal");
-            GetComponent<Rigidbody2D>().velocity = new Vector2(move * speed, moveUp * speed * 10);
+			GetComponent<Rigidbody2D>().velocity = new Vector2(move * (speed + 3) , moveUp * speed * 10);
             GetComponent<Rigidbody2D>().gravityScale = 32;
 
 			Physics2D.gravity = new Vector2 (0, -10);
@@ -106,7 +106,7 @@ public class MovePlayer : MonoBehaviour
         {
             move = Input.GetAxis("Horizontal");
 			moveUp = Input.GetAxis("Vertical");
-			GetComponent<Rigidbody2D>().velocity = new Vector2(move, moveUp * speed);
+			GetComponent<Rigidbody2D>().velocity = new Vector2(move*speed/2, moveUp * speed);
             GetComponent<Rigidbody2D>().gravityScale = 0;
         }
 
